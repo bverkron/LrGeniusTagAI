@@ -15,6 +15,9 @@ Lightroom, on the Library grid or during export.
   - OpenAI ChatGPT (Nano, Mini, standard) via the OpenAI API
   - [Ollama](https://ollama.com) — run a local vision model, no cloud/API key needed
   - [LM Studio](https://lmstudio.ai) — run a local vision model, no cloud/API key needed
+  - Any self-hosted OpenAI API compatible server (llama.cpp server,
+    mlx_vlm.server, vLLM, text-generation-webui, LocalAI, ...) — point the
+    plugin at your own URL, no cloud/API key needed
 - **Configurable output** — independently enable/disable generation of title,
   caption, alt text (for accessibility), and keywords.
 - **Keyword hierarchy** — optionally sort generated keywords into categories
@@ -57,6 +60,8 @@ Lightroom, on the Library grid or during export.
   - an OpenAI API key (for ChatGPT models)
   - a local [Ollama](https://ollama.com) or [LM Studio](https://lmstudio.ai)
     install running a vision-capable model
+  - a self-hosted, OpenAI API compatible server running a vision-capable
+    model
 
 ## Installation
 
@@ -76,6 +81,12 @@ All settings live under **File → Plug-in Manager → LrGeniusTagAI**:
 - **API keys** — enter your Gemini and/or ChatGPT API key, or set the base URL
   for a local Ollama/LM Studio server (defaults to `localhost:11434` /
   `localhost:1234`).
+- **Local backend type** — choose whether the plugin auto-discovers models
+  from Ollama or from a self-hosted, OpenAI API compatible server; set that
+  server's URL in the **OpenAI API URL** field below the Ollama Base URL
+  field (defaults to `localhost:8080`, the common default for e.g. llama.cpp
+  server and mlx_vlm.server/mlx_lm.server — check your own server's docs,
+  since this varies by project).
 - **Prompts** — edit the default system prompt or add/delete named presets.
 - **Result language** — choose the output language.
 - **Generate** — toggle which fields to generate (caption, alt text, title,
@@ -105,9 +116,12 @@ All settings live under **File → Plug-in Manager → LrGeniusTagAI**:
 | ChatGPT    | 5.4 Nano/Mini, 5.4, 5.5                               | OpenAI API key  |
 | Ollama     | any locally installed vision model                    | Ollama running locally |
 | LM Studio  | any locally installed vision model                    | LM Studio running locally |
+| OpenAI API | any model served by your OpenAI API compatible backend | Your own server running locally/on your network |
 
 Cloud provider usage is billed by the provider according to your own API plan;
-local Ollama/LM Studio models are free but require sufficient local hardware.
+local Ollama/LM Studio/OpenAI API models are free but require sufficient local
+hardware. The plugin does not run or configure the OpenAI API compatible
+server for you — it only talks to one you already have running.
 
 ## Links
 

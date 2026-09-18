@@ -31,6 +31,7 @@ require "GeminiAPI"
 require "ChatGptAPI"
 require "OllamaAPI"
 require "LmStudioAPI"
+require "OpenAiApiAPI"
 require "ResponseStructure"
 require "AnalyzeImageProvider"
 require "KeywordConfigProvider"
@@ -167,6 +168,14 @@ end
 
 if _G.prefs.ollamaBaseUrl == nil then
     _G.prefs.ollamaBaseUrl = Defaults.baseUrls['ollama']
+end
+
+if _G.prefs.openaiApiUrl == nil then
+    _G.prefs.openaiApiUrl = Defaults.baseUrls['openaiapi']
+end
+
+if _G.prefs.localBackendType == nil then
+    _G.prefs.localBackendType = 'ollama'
 end
 
 if _G.prefs.activated == nil then

@@ -17,6 +17,9 @@ function AiModelAPI:new()
     elseif string.sub(prefs.ai, 1, 8) == 'lmstudio' then
         self.usedApi = LmStudioAPI:new()
         self.topKeyword = Defaults.lmStudioTopKeyWord
+    elseif string.sub(prefs.ai, 1, 9) == 'openaiapi' then
+        self.usedApi = OpenAiApiAPI:new()
+        self.topKeyword = Defaults.openaiApiTopKeyword
     else
         ErrorHandler.handleError('No valid AI model selected', LOC "$$$/lrc-ai-assistant/AiModelAPI/NoModelSelectedError=No AI model selected, check Configuration in Add-Ons manager")
     end

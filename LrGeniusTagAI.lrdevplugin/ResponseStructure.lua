@@ -29,7 +29,7 @@ function ResponseStructure:new()
         self.strObject = "OBJECT"
         self.strString = "STRING"
         self.ai = 'gemini'
-    elseif string.sub(prefs.ai, 1, 3) == 'gpt' or string.sub(prefs.ai, 1, 8) == 'lmstudio' then
+    elseif string.sub(prefs.ai, 1, 3) == 'gpt' or string.sub(prefs.ai, 1, 8) == 'lmstudio' or string.sub(prefs.ai, 1, 9) == 'openaiapi' then
         self.strArray = "array"
         self.strObject = "object"
         self.strString = "string"
