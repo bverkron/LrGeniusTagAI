@@ -57,10 +57,19 @@ function Defaults.getAvailableAiModels()
         table.insert(result, model)
     end
 
-    local ollamaModels = OllamaAPI.getLocalVisionModels()
-    if ollamaModels ~= nil and type(ollamaModels) == "table" then
-        for _, model in ipairs(ollamaModels) do
-            table.insert(result, model)
+    if prefs.localBackendType == 'openaiapi' then
+        local openaiApiModels = OpenAiApiAPI.getLocalVisionModels()
+        if openaiApiModels ~= nil and type(openaiApiModels) == "table" then
+            for _, model in ipairs(openaiApiModels) do
+                table.insert(result, model)
+            end
+        end
+    else
+        local ollamaModels = OllamaAPI.getLocalVisionModels()
+        if ollamaModels ~= nil and type(ollamaModels) == "table" then
+            for _, model in ipairs(ollamaModels) do
+                table.insert(result, model)
+            end
         end
     end
     
@@ -78,6 +87,11 @@ end
 
 Defaults.exportSizes = {
     "512", "1024", "2048", "3072", "4096"
+}
+
+Defaults.localBackendTypes = {
+    { title = "Ollama", value = "ollama" },
+    { title = "OpenAI API", value = "openaiapi" },
 }
 
 Defaults.baseUrls = {}
@@ -104,6 +118,10 @@ Defaults.ollamaGenerateUrl = '/api/generate'
 Defaults.ollamaChatUrl = '/api/chat'
 Defaults.ollamaListModelUrl = '/api/tags'
 Defaults.ollamaModelInfoUrl = '/api/show'
+
+Defaults.baseUrls['openaiapi'] = 'http://localhost:8080'
+Defaults.openaiApiChatUrl = '/v1/chat/completions'
+Defaults.openaiApiListModelUrl = '/v1/models'
 
 Defaults.pricing = {}
 Defaults.pricing["gemini-2.5-pro"] = {}
@@ -148,6 +166,7 @@ Defaults.googleTopKeyword = 'Google Gemini'
 Defaults.chatgptTopKeyword = 'ChatGPT'
 Defaults.ollamaTopKeyWord = 'Ollama'
 Defaults.lmStudioTopKeyWord = 'LMStudio'
+Defaults.openaiApiTopKeyword = 'OpenAI API'
 
 Defaults.geminiKeywordsGarbageAtStart = '```json'
 Defaults.geminiKeywordsGarbageAtEnd = '```'

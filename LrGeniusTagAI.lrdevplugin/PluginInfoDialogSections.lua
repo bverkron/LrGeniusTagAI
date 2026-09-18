@@ -58,6 +58,9 @@ function PluginInfoDialogSections.startDialog(propertyTable)
 
     propertyTable.ollamaBaseUrl = prefs.ollamaBaseUrl
 
+    propertyTable.localBackendType = prefs.localBackendType
+    propertyTable.openaiApiUrl = prefs.openaiApiUrl
+
     propertyTable.licenseKey = prefs.licenseKey
 
     propertyTable.periodicalUpdateCheck = prefs.periodicalUpdateCheck
@@ -233,6 +236,16 @@ function PluginInfoDialogSections.sectionsForTopOfDialog(f, propertyTable)
                 },
                 f:row {
                     f:static_text {
+                        title = LOC "$$$/lrc-ai-assistant/PluginInfoDialogSections/LocalBackendType=Local backend type",
+                        width = share 'labelWidth'
+                    },
+                    f:popup_menu {
+                        value = bind 'localBackendType',
+                        items = Defaults.localBackendTypes,
+                    },
+                },
+                f:row {
+                    f:static_text {
                         title = LOC "$$$/lrc-ai-assistant/PluginInfoDialogSections/OllamaBaseUrl=Ollama Base URL",
                         width = share 'labelWidth'
                     },
@@ -247,6 +260,17 @@ function PluginInfoDialogSections.sectionsForTopOfDialog(f, propertyTable)
                             LrHttp.openUrlInBrowser("https://lrgenius.com/help/docs/help-ollama-setup/")
                         end,
                         width = share 'apiButtonWidth',
+                    },
+                },
+                f:row {
+                    f:static_text {
+                        title = LOC "$$$/lrc-ai-assistant/PluginInfoDialogSections/OpenAiApiUrl=OpenAI API URL",
+                        width = share 'labelWidth'
+                    },
+                    f:edit_field {
+                        value = bind 'openaiApiUrl',
+                        width = share 'inputWidth',
+                        width_in_chars = 25,
                     },
                 },
             },
@@ -511,6 +535,9 @@ function PluginInfoDialogSections.endDialog(propertyTable)
     prefs.prompts = propertyTable.prompts
 
     prefs.ollamaBaseUrl = propertyTable.ollamaBaseUrl
+
+    prefs.localBackendType = propertyTable.localBackendType
+    prefs.openaiApiUrl = propertyTable.openaiApiUrl
 
     prefs.licenseKey = propertyTable.licenseKey
     
